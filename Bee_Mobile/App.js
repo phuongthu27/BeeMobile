@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import SavingGoalScreen from './views/SavingGoalSrceen/SavingGoalList';
 
 
 function HomeScreen() {
@@ -13,16 +14,6 @@ function HomeScreen() {
                 Home Screen
             </Text>
         </View>
-    );
-}
-
-function TransactionScreen() {
-  return (
-    <View >
-        <Text>
-            Home Screen
-        </Text>
-    </View>
     );
 }
 
@@ -69,10 +60,10 @@ export default function App() {
     
                 if (route.name === "Tổng quan") {
                   iconName = "home";
-                  IconComponent = FontAwesomeIcon; // Sử dụng FontAwesome cho "Tổng quan"
-                } else if (route.name === "Giao dịch") {
+                  IconComponent = FontAwesomeIcon;
+                } else if (route.name === "Mục tiêu") {
                   iconName = "account-balance-wallet";
-                  IconComponent = MaterialIcon; // Sử dụng MaterialIcons cho "Giao dịch"
+                  IconComponent = MaterialIcon;
                 } else if (route.name === "Add") {
                   iconName = "add-circle";
                   IconComponent = MaterialIcon;
@@ -88,7 +79,7 @@ export default function App() {
           })}
       >
         <Tab.Screen name="Tổng quan" component={HomeScreen} />
-        <Tab.Screen name="Giao dịch" component={TransactionScreen} />
+        <Tab.Screen name="Mục tiêu" component={SavingGoalScreen} />
         <Tab.Screen name="Add" component={AddScreen} options={{tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
           <MaterialIcon 
             name="add-circle" 
