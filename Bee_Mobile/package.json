@@ -13,7 +13,11 @@
     "expo-status-bar": "~1.12.1",
     "postcss": "^8.4.41",
     "react": "18.2.0",
-    "react-native": "0.74.5"
+    "react-native": "0.74.5",
+    "@react-navigation/native": "6.1.6",
+    "@react-navigation/stack": "6.3.16",
+    "@react-navigation/bottom-tabs": "6.5.20",
+    "react-native-vector-icons": "10.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
