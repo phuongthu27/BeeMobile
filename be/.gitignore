@@ -1,0 +1,27 @@
+# Node modules
+/node_modules
+node_modules/
+package-lock.json
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Đường dẫn tới file môi trường
+.env
+
+# Thư mục IDE
+.idea/
+.vscode/
+
+# Thư mục build
+build/
+dist/
+
+# Thư mục tạm thời
+tmp/
+temp/
+
+# Các file khác
+.DS_Store
+Thumbs.db
