@@ -1,15 +1,19 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar } from "react-native-paper";
 import tw from "twrnc";
 
-export default function SavingGoalScreen() {
+export default function SavingGoalScreen({ navigation }) {
   const savingGoals = [
     { title: "Mua giường thú cưng", saved: 200000, target: 200000 },
     { title: "Mua máy tính mới", saved: 0, target: 2000000 },
-    { title: "Mua điện thoại mới", saved: 100000, target: 200000 }
+    { title: "Mua điện thoại mới", saved: 100000, target: 200000 },
   ];
+
+  const navigateToDetail = (goal) => {
+    navigation.navigate('SavingGoalDetail', { goal }); // Truyền dữ liệu mục tiêu sang trang chi tiết
+  };
 
   return (
     <View style={tw`flex-1 items-center`}>
@@ -48,7 +52,7 @@ export default function SavingGoalScreen() {
 
       <TouchableOpacity
         style={tw`bg-purple-600 px-4 py-2 rounded-full`}
-        onPress={() => alert("Thêm mục tiêu!")}
+        onPress={() => navigation.navigate('SavingGoalAdd')}
       >
         <Text style={tw`text-white text-base font-bold`}>Thêm mục tiêu</Text>
       </TouchableOpacity>
@@ -58,7 +62,7 @@ export default function SavingGoalScreen() {
           const progress = goal.saved / goal.target;
           const progressPercentage = Math.floor(progress * 100);
 
-          let progressBarColor = "red"; 
+          let progressBarColor = "red";
           if (progress >= 0.8) {
             progressBarColor = "green";
           } else if (progress >= 0.5) {
@@ -86,7 +90,11 @@ export default function SavingGoalScreen() {
           }
 
           return (
-            <View key={index} style={tw`border rounded-lg p-4 mb-4 bg-white`}>
+            <TouchableOpacity
+              key={index}
+              onPress={() => navigateToDetail(goal)} // Điều hướng khi nhấn vào mục tiêu
+              style={tw`border rounded-lg p-4 mb-4 bg-white`}
+            >
               <View style={tw`flex-row items-center`}>
                 <Image
                   source={require("../../assets/images/favicon.png")}
@@ -95,24 +103,31 @@ export default function SavingGoalScreen() {
                 <View style={tw`flex-1`}>
                   <Text style={tw`font-bold text-lg`}>{goal.title}</Text>
                   <Text style={tw`text-gray-500`}>
-                    {goal.saved.toLocaleString()}đ - {goal.target.toLocaleString()}đ
+                    {goal.saved.toLocaleString()}đ -{" "}
+                    {goal.target.toLocaleString()}đ
                   </Text>
                 </View>
               </View>
 
               <ProgressBar
-                progress={progress} 
-                color={progressBarColor} 
-                style={tw`h-2 rounded-full mt-2`} 
+                progress={progress}
+                color={progressBarColor}
+                style={tw`h-2 rounded-full mt-2`}
               />
 
               <View style={tw`flex-row justify-between mt-1`}>
-                <Text style={tw`text-xs text-gray-600`} style={{ color: statusColor }}>{progressPercentage}%</Text>
-                <Text style={tw`text-xs font-semibold`} style={{ color: statusColor }}>
+                <Text
+                  style={[tw`text-xs text-gray-600`, { color: statusColor }]}
+                >
+                  {progressPercentage}%
+                </Text>
+                <Text
+                  style={[tw`text-xs font-semibold`, { color: statusColor }]}
+                >
                   {statusText}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </View>
