@@ -2,14 +2,47 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack'; // Import Stack Navigator
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import SavingGoalScreen from './views/SavingGoalSrceen/SavingGoalList';
+import SavingGoalAdd from './views/SavingGoalSrceen/SavingGoalAdd';
+import SavingGoalEdit from './views/SavingGoalSrceen/SavingGoalEdit';
+import SavingGoalDetail from './views/SavingGoalSrceen/SavingGoalDetail';
 
+// Tạo Stack Navigator cho SavingGoal
+const SavingGoalStack = createStackNavigator();
+
+function SavingGoalStackScreen() {
+  return (
+    <SavingGoalStack.Navigator>
+      <SavingGoalStack.Screen 
+        name="SavingGoalList" 
+        component={SavingGoalScreen} 
+        options={{ title: 'Danh sách mục tiêu' }} 
+      />
+      <SavingGoalStack.Screen 
+        name="SavingGoalAdd" 
+        component={SavingGoalAdd} 
+        options={{ title: 'Thêm mục tiêu' }} 
+      />
+      <SavingGoalStack.Screen 
+        name="SavingGoalEdit" 
+        component={SavingGoalEdit} 
+        options={{ title: 'Sửa mục tiêu' }} 
+      />
+      <SavingGoalStack.Screen 
+        name="SavingGoalDetail" 
+        component={SavingGoalDetail} 
+        options={{ title: 'Chi tiết mục tiêu' }} 
+      />
+    </SavingGoalStack.Navigator>
+  );
+}
 
 function HomeScreen() {
     return (
-        <View style={{flex: 1, alignItem: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text>
                 Home Screen
             </Text>
@@ -19,9 +52,9 @@ function HomeScreen() {
 
 function AddScreen() {
   return (
-    <View >
+    <View>
         <Text>
-            Home Screen
+            Add Screen
         </Text>
     </View>
     );
@@ -29,9 +62,9 @@ function AddScreen() {
 
 function BudgetScreen() {
   return (
-    <View >
+    <View>
         <Text>
-            Home Screen
+            Budget Screen
         </Text>
     </View>
     );
@@ -39,15 +72,15 @@ function BudgetScreen() {
 
 function ProfileScreen() {
   return (
-    <View >
+    <View>
         <Text>
-            Home Screen
+            Profile Screen
         </Text>
     </View>
     );
 }
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
@@ -79,8 +112,9 @@ export default function App() {
           })}
       >
         <Tab.Screen name="Tổng quan" component={HomeScreen} />
-        <Tab.Screen name="Mục tiêu" component={SavingGoalScreen} />
-        <Tab.Screen name="Add" component={AddScreen} options={{tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
+        {/* Sử dụng Stack Navigator cho Mục tiêu */}
+        <Tab.Screen name="Mục tiêu" component={SavingGoalStackScreen} />
+        <Tab.Screen name="Add" component={AddScreen} options={{ tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
           <MaterialIcon 
             name="add-circle" 
             size={focused ? 50 : 45} 
