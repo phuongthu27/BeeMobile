@@ -2,13 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack'; 
+import { createStackNavigator } from '@react-navigation/stack'; // Import Stack Navigator
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import SavingGoalScreen from './views/SavingGoalSrceen/SavingGoalList';
+import SavingGoalAdd from './views/SavingGoalSrceen/SavingGoalAdd';
+import SavingGoalEdit from './views/SavingGoalSrceen/SavingGoalEdit';
+import SavingGoalDetail from './views/SavingGoalSrceen/SavingGoalDetail';
 
+// Tạo Stack Navigator cho SavingGoal
 const SavingGoalStack = createStackNavigator();
-const TransactionStack = createStackNavigator();
 
 function SavingGoalStackScreen() {
   return (
@@ -49,9 +52,9 @@ function HomeScreen() {
 
 function AddScreen() {
   return (
-    <View >
+    <View>
         <Text>
-            Home Screen
+            Add Screen
         </Text>
     </View>
     );
@@ -107,8 +110,9 @@ export default function App() {
           })}
       >
         <Tab.Screen name="Tổng quan" component={HomeScreen} />
-        <Tab.Screen name="Mục tiêu" component={SavingGoalScreen} />
-        <Tab.Screen name="Add" component={AddScreen} options={{tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
+        {/* Sử dụng Stack Navigator cho Mục tiêu */}
+        <Tab.Screen name="Mục tiêu" component={SavingGoalStackScreen} />
+        <Tab.Screen name="Add" component={AddScreen} options={{ tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
           <MaterialIcon 
             name="add-circle" 
             size={focused ? 50 : 45} 
