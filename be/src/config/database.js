@@ -8,7 +8,6 @@ const connectDB = async () => {
         await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-            // không cần dùng useFindAndModify nữa
         });
         console.log(process.env.MONGODB_URI);
         console.log('MongoDB connected @@...');
