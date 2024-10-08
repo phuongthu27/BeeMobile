@@ -2,13 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack'; // Import Stack Navigator
+import { createStackNavigator } from '@react-navigation/stack'; 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import SavingGoalScreen from './views/SavingGoalSrceen/SavingGoalList';
-import SavingGoalAdd from './views/SavingGoalSrceen/SavingGoalAdd';
-import SavingGoalEdit from './views/SavingGoalSrceen/SavingGoalEdit';
-import SavingGoalDetail from './views/SavingGoalSrceen/SavingGoalDetail';
+import SavingGoalScreen from './screens/SavingGoalSrceen/SavingGoalList';
+import SavingGoalAdd from './screens/SavingGoalSrceen/SavingGoalAdd';
+import SavingGoalEdit from './screens/SavingGoalSrceen/SavingGoalEdit';
+import SavingGoalDetail from './screens/SavingGoalSrceen/SavingGoalDetail';
+import HomeScreen from './screens/HomeScreen';
+import BudgetScreen from './screens/BudgetScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import TransactionScreen from './screens/TransactionScreen';
+import AuthStack from './navigation/AuthStack';
+import TabNavigator from './navigation/TabNavigator';
 
 // Tạo Stack Navigator cho SavingGoal
 const SavingGoalStack = createStackNavigator();
@@ -40,45 +46,6 @@ function SavingGoalStackScreen() {
   );
 }
 
-function HomeScreen() {
-    return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text>
-                Home Screen
-            </Text>
-        </View>
-    );
-}
-
-function AddScreen() {
-  return (
-    <View>
-        <Text>
-            Add Screen
-        </Text>
-    </View>
-    );
-}
-
-function BudgetScreen() {
-  return (
-    <View>
-        <Text>
-            Budget Screen
-        </Text>
-    </View>
-    );
-}
-
-function ProfileScreen() {
-  return (
-    <View>
-        <Text>
-            Profile Screen
-        </Text>
-    </View>
-    );
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -97,7 +64,7 @@ export default function App() {
                 } else if (route.name === "Mục tiêu") {
                   iconName = "account-balance-wallet";
                   IconComponent = MaterialIcon;
-                } else if (route.name === "Add") {
+                } else if (route.name === "Giao dịch") {
                   iconName = "add-circle";
                   IconComponent = MaterialIcon;
                 } else if (route.name === "Ngân sách") {
@@ -114,7 +81,7 @@ export default function App() {
         <Tab.Screen name="Tổng quan" component={HomeScreen} />
         {/* Sử dụng Stack Navigator cho Mục tiêu */}
         <Tab.Screen name="Mục tiêu" component={SavingGoalStackScreen} />
-        <Tab.Screen name="Add" component={AddScreen} options={{ tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
+        <Tab.Screen name="Giao dịch" component={TransactionScreen} options={{ tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
           <MaterialIcon 
             name="add-circle" 
             size={focused ? 50 : 45} 
