@@ -1,35 +1,30 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
-# dependencies
+# Node modules
+/node_modules
 node_modules/
 
-# Expo
-.expo/
+/package-lock.json
+
+/.expo
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Đường dẫn tới file môi trường
+.env
+
+# Thư mục IDE
+.idea/
+.vscode/
+
+# Thư mục build
+build/
 dist/
-web-build/
 
-# Native
-*.orig.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
+# Thư mục tạm thời
+tmp/
+temp/
 
-# Metro
-.metro-health-check*
-
-# debug
-npm-debug.*
-yarn-debug.*
-yarn-error.*
-
-# macOS
+# Các file khác
 .DS_Store
-*.pem
-
-# local env files
-.env*.local
-
-# typescript
-*.tsbuildinfo
+Thumbs.db
