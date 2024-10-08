@@ -5,10 +5,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack'; // Import Stack Navigator
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import SavingGoalScreen from './views/SavingGoalSrceen/SavingGoalList';
-import SavingGoalAdd from './views/SavingGoalSrceen/SavingGoalAdd';
-import SavingGoalEdit from './views/SavingGoalSrceen/SavingGoalEdit';
-import SavingGoalDetail from './views/SavingGoalSrceen/SavingGoalDetail';
+import SavingGoalScreen from './screens/SavingGoalSrceen/SavingGoalList';
+import SavingGoalAdd from './screens/SavingGoalSrceen/SavingGoalAdd';
+import SavingGoalEdit from './screens/SavingGoalSrceen/SavingGoalEdit';
+import SavingGoalDetail from './screens/SavingGoalSrceen/SavingGoalDetail';
 
 // Tạo Stack Navigator cho SavingGoal
 const SavingGoalStack = createStackNavigator();
