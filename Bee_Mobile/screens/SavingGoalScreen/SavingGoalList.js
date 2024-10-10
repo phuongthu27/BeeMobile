@@ -1,22 +1,39 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, Image, ActivityIndicator, ScrollView } from "react-native";
 import Svg, { Ellipse } from "react-native-svg";
 import { ProgressBar } from "react-native-paper";
 import tw from "twrnc";
+import { fetchAllSavingGoals } from "../../services/SavingsGoalService/index";
 
 export default function SavingGoalScreen({ navigation }) {
-  const savingGoals = [
-    { title: "Mua giường thú cưng", saved: 200000, target: 200000 },
-    { title: "Mua máy tính mới", saved: 0, target: 2000000 },
-    { title: "Mua điện thoại mới", saved: 100000, target: 200000 },
-  ];
+  const [savingGoals, setSavingGoals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSavingGoals = async () => {
+      try {
+        const goals = await fetchAllSavingGoals();
+        setSavingGoals(goals);
+      } catch (error) {
+        console.error("Error loading saving goals", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSavingGoals();
+  }, []);
 
   const navigateToDetail = (goal) => {
-    navigation.navigate('SavingGoalDetail', { goal }); // Truyền dữ liệu mục tiêu sang trang chi tiết
+    navigation.navigate('SavingGoalDetail', { goal });
   };
 
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
   return (
-    <View style={tw`flex-1 items-center`}>
+    <ScrollView style={tw`flex-1`} contentContainerStyle={tw`items-center p-4`}>
       <View style={tw`items-center justify-center`}>
         <Svg height="150" width="220">
           <Ellipse
@@ -30,9 +47,7 @@ export default function SavingGoalScreen({ navigation }) {
           />
         </Svg>
 
-        <Text style={tw`absolute top-13 text-base text-center`}>
-          bạn cần tiết kiệm
-        </Text>
+        <Text style={tw`absolute top-13 text-base text-center`}>bạn cần tiết kiệm</Text>
         <Text style={tw`absolute top-18 text-base`}>3,000,000 đ</Text>
       </View>
 
@@ -59,7 +74,7 @@ export default function SavingGoalScreen({ navigation }) {
 
       <View style={tw`w-full mt-3 pl-2 pr-2`}>
         {savingGoals.map((goal, index) => {
-          const progress = goal.saved / goal.target;
+          const progress = goal.currentAmount / goal.targetAmount;
           const progressPercentage = Math.floor(progress * 100);
 
           let progressBarColor = "red";
@@ -92,7 +107,7 @@ export default function SavingGoalScreen({ navigation }) {
           return (
             <TouchableOpacity
               key={index}
-              onPress={() => navigateToDetail(goal)} // Điều hướng khi nhấn vào mục tiêu
+              onPress={() => navigateToDetail(goal)}
               style={tw`border rounded-lg p-4 mb-4 bg-white`}
             >
               <View style={tw`flex-row items-center`}>
@@ -101,10 +116,10 @@ export default function SavingGoalScreen({ navigation }) {
                   style={tw`w-12 h-12 rounded-full mr-4`}
                 />
                 <View style={tw`flex-1`}>
-                  <Text style={tw`font-bold text-lg`}>{goal.title}</Text>
+                  <Text style={tw`font-bold text-lg`}>{goal.name}</Text>
                   <Text style={tw`text-gray-500`}>
-                    {goal.saved.toLocaleString()}đ -{" "}
-                    {goal.target.toLocaleString()}đ
+                    {(goal.currentAmount || 0).toLocaleString()}đ -{" "}
+                    {(goal.targetAmount || 0).toLocaleString()}đ
                   </Text>
                 </View>
               </View>
@@ -131,6 +146,6 @@ export default function SavingGoalScreen({ navigation }) {
           );
         })}
       </View>
-    </View>
+    </ScrollView>
   );
 }
