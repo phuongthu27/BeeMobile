@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Platform, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Platform, Image, Alert } from 'react-native';
 import tw from 'twrnc';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { ProgressBar } from "react-native-paper";
+import { addSavingGoal } from '../../services/SavingsGoalService/index';
 
 export default function AddGoal() {
   const [goalName, setGoalName] = useState('');
@@ -33,6 +34,31 @@ export default function AddGoal() {
 
   const handleCategoryPress = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleSaveGoal = async () => {
+    const newGoal = {
+      name: goalName,
+      targetAmount: parseInt(goalAmount, 10),
+      currentAmount: parseInt(savedAmount, 10),
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      category: selectedCategory,
+    };
+
+    try {
+      const result = await addSavingGoal(newGoal);
+      Alert.alert('Thành công', 'Mục tiêu tiết kiệm đã được lưu!', [{ text: 'OK' }]);
+      
+      setGoalName('');
+      setGoalAmount('');
+      setSavedAmount('');
+      setStartDate(new Date());
+      setEndDate(new Date());
+      setSelectedCategory('');
+    } catch (error) {
+      Alert.alert('Lỗi', error.message, [{ text: 'OK' }]);
+    }
   };
 
   return (
@@ -115,7 +141,7 @@ export default function AddGoal() {
         </View>
 
         <View style={tw`bg-white p-4 rounded-lg mb-4`}>
-          <Text style={tw`font-bold mb-3`}>Danh mục</Text>
+          <Text style={tw`font-bold text-lg mb-3`}>Danh mục</Text> 
           <View style={tw`flex-row flex-wrap justify-between mb-5`}>
             {['Ăn', 'Uống', 'Mua sắm', 'Giáo dục', 'Di chuyển', 'Du lịch'].map((category, index) => (
               <TouchableOpacity
@@ -133,68 +159,11 @@ export default function AddGoal() {
           </View>
         </View>
 
-        <View style={tw`bg-white p-4 rounded-lg mb-4`}>
-          {[{ title: "Mua giường thú cưng", saved: 200000, target: 200000 }].map((goal, index) => {
-            const progress = goal.saved / goal.target;
-            const progressPercentage = Math.floor(progress * 100);
-
-            let progressBarColor = "red";
-            if (progress >= 0.8) {
-              progressBarColor = "green";
-            } else if (progress >= 0.5) {
-              progressBarColor = "#FFF9C4";
-            }
-
-            let statusText = "";
-            let statusColor = "";
-
-            if (progress === 1) {
-              statusText = "Hoàn thành";
-              statusColor = "green";
-            } else if (progress === 0) {
-              statusText = "Chưa tiết kiệm";
-              statusColor = "red";
-            } else {
-              statusText = `Còn lại ${100 - progressPercentage}%`;
-              statusColor = progress >= 0.5 ? "green" : "red";
-            }
-
-            return (
-              <View key={index} style={tw`border rounded-lg p-4 mb-4 bg-white`}>
-                <View style={tw`flex-row items-center`}>
-                  <Image
-                    source={require("../../assets/images/favicon.png")}
-                    style={tw`w-12 h-12 rounded-full mr-4`}
-                  />
-                  <View style={tw`flex-1`}>
-                    <Text style={tw`font-bold text-lg`}>{goal.title}</Text>
-                    <Text style={tw`text-gray-500`}>
-                      {goal.saved.toLocaleString()}đ - {goal.target.toLocaleString()}đ
-                    </Text>
-                  </View>
-                </View>
-
-                <ProgressBar
-                  progress={progress}
-                  color={progressBarColor}
-                  style={tw`h-2 rounded-full mt-2`}
-                />
-
-                <View style={tw`flex-row justify-between mt-1`}>
-                  <Text style={[tw`text-xs text-gray-600`, { color: statusColor }]}>
-                    {progressPercentage}%
-                  </Text>
-                  <Text style={[tw`text-xs font-semibold`, { color: statusColor }]}>
-                    {statusText}
-                  </Text>
-                </View>
-              </View>
-            );
-          })}
-        </View>
-
-        <TouchableOpacity style={tw`bg-purple-600 py-4 rounded-lg items-center`}>
-          <Text style={tw`text-white font-bold`}>Lưu</Text>
+        <TouchableOpacity
+          onPress={handleSaveGoal}
+          style={tw`bg-blue-500 p-4 rounded-lg items-center`}
+        >
+          <Text style={tw`text-white font-bold`}>Lưu mục tiêu</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

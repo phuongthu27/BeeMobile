@@ -2,15 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack'; // Import Stack Navigator
+import { createStackNavigator } from '@react-navigation/stack';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import SavingGoalScreen from './screens/SavingGoalSrceen/SavingGoalList';
-import SavingGoalAdd from './screens/SavingGoalSrceen/SavingGoalAdd';
-import SavingGoalEdit from './screens/SavingGoalSrceen/SavingGoalEdit';
-import SavingGoalDetail from './screens/SavingGoalSrceen/SavingGoalDetail';
+import SavingGoalScreen from './screens/SavingGoalScreen/SavingGoalList';
+import SavingGoalAdd from './screens/SavingGoalScreen/SavingGoalAdd';
+import SavingGoalEdit from './screens/SavingGoalScreen/SavingGoalEdit';
+import SavingGoalDetail from './screens/SavingGoalScreen/SavingGoalDetail';
 
-// Tạo Stack Navigator cho SavingGoal
 const SavingGoalStack = createStackNavigator();
 
 function SavingGoalStackScreen() {
@@ -87,6 +86,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
           screenOptions = {({ route }) => ({
+              headerShown: false,
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
                 let IconComponent;
@@ -112,7 +112,6 @@ export default function App() {
           })}
       >
         <Tab.Screen name="Tổng quan" component={HomeScreen} />
-        {/* Sử dụng Stack Navigator cho Mục tiêu */}
         <Tab.Screen name="Mục tiêu" component={SavingGoalStackScreen} />
         <Tab.Screen name="Add" component={AddScreen} options={{ tabBarLabel: () => null, tabBarIcon: ({ focused }) => (
           <MaterialIcon 
