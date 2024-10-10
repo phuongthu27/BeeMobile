@@ -1,8 +1,8 @@
 const express = require('express');
-const { getAllSavingsGoals } = require('../controllers/SavingsGoalController');
+const { getAllSavingsGoals, addSavingsGoal } = require('../controllers/SavingsGoalController');
 const router = express.Router();
 
-// Route để lấy tất cả mục tiêu tiết kiệm
 router.get('/goals', getAllSavingsGoals);
+router.post('/goals', addSavingsGoal);
 
 module.exports = router;
