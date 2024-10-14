@@ -1,6 +1,4 @@
 import React from "react";
-import { Text, View, TextInput, Image, TouchableOpacity } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SavingGoalScreen from '../screens/SavingGoalScreen/SavingGoalList';
 import SavingGoalAdd from '../screens/SavingGoalScreen/SavingGoalAdd';
@@ -8,7 +6,6 @@ import SavingGoalEdit from '../screens/SavingGoalScreen/SavingGoalEdit';
 import SavingGoalDetail from '../screens/SavingGoalScreen/SavingGoalDetail';
 
 const SavingGoalStack = createStackNavigator();
-
 
     function SavingGoalStackScreen() {
         return (
