@@ -10,7 +10,10 @@ import SavingGoalAdd from './screens/SavingGoalSrceen/SavingGoalAdd';
 import SavingGoalEdit from './screens/SavingGoalSrceen/SavingGoalEdit';
 import SavingGoalDetail from './screens/SavingGoalSrceen/SavingGoalDetail';
 import HomeScreen from './screens/HomeScreen';
-import BudgetScreen from './screens/BudgetScreen';
+import BudgetScreen from './screens/BudgetSrceen/BudgetList';
+import BudgetAdd from './screens/BudgetSrceen/BudgetAdd';
+import BudgetDetail from './screens/BudgetSrceen/BudgetDetail';
+import BudgetEdit from './screens/BudgetSrceen/BudgetEdit';
 import ProfileScreen from './screens/ProfileScreen';
 import TransactionScreen from './screens/TransactionScreen';
 import AuthStack from './navigation/AuthStack';
@@ -19,6 +22,7 @@ import TabNavigator from './navigation/TabNavigator';
 
 // Tạo Stack Navigator cho SavingGoal
 const SavingGoalStack = createStackNavigator();
+const BudgetStack = createStackNavigator();
 
 function SavingGoalStackScreen() {
   return (
@@ -47,6 +51,32 @@ function SavingGoalStackScreen() {
   );
 }
 
+function BudgetStackScreen() {
+  return (
+    <BudgetStack.Navigator>
+      <BudgetStack.Screen 
+        name="BudgetList" 
+        component={BudgetScreen} 
+        options={{ headerShown: false }} 
+      />
+      <BudgetStack.Screen 
+        name="BudgetAdd" 
+        component={BudgetAdd} 
+        options={{ title: 'Thêm ngân sách' }} 
+      />
+      <BudgetStack.Screen 
+        name="BudgetEdit" 
+        component={BudgetEdit} 
+        options={{ title: 'Cập nhật ngân sách' }} 
+      />
+      <BudgetStack.Screen 
+        name="BudgetDetail" 
+        component={BudgetDetail} 
+        options={{ title: 'Chi tiết ngân sách' }} 
+      />
+    </BudgetStack.Navigator>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -89,7 +119,7 @@ export default function App() {
             color="#5D0DE1" 
           />
         ),}}/>
-        <Tab.Screen name="Ngân sách" component={BudgetScreen} />
+        <Tab.Screen name="Ngân sách" component={BudgetStackScreen} />
         <Tab.Screen name="Tài khoản" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
