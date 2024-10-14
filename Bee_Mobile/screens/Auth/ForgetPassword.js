@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import tailwind from 'twrnc';
 
-function ForgetPassword() {
+function ForgetPassword({ navigation }) {
     const piggyBank = require('../../assets/images/piggy-bank.png'); 
 
     return (
@@ -20,7 +20,9 @@ function ForgetPassword() {
                 style={tailwind`w-80 h-12 px-4 bg-white border border-gray-300 rounded-lg mb-4`}
             />
             <View style={tailwind`flex-row justify-between w-80 mb-4`}>
-                <Text style={tailwind`text-purple-700`}>Bạn chưa có tài khoản?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <Text style={tailwind`text-purple-700`}>Bạn đã có tài khoản?</Text>
+            </TouchableOpacity>
             </View>
             <TouchableOpacity style={tailwind`w-80 h-12 bg-purple-700 rounded-lg items-center justify-center`}>
                 <Text style={tailwind`text-white text-lg`}>Gửi</Text>
