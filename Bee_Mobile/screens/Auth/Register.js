@@ -50,7 +50,7 @@ function Register({ navigation }) {
             <Text style={tailwind`text-2xl font-bold text-purple-800 mb-4`}>
                 BEEMONEY
             </Text>
-            <Text style={tailwind`text-2xl font-bold text-dark-780 mb-4`}>Đăng ký</Text>
+            <Text style={tailwind`text-2xl font-bold text-gray-800 mb-4`}>Đăng ký</Text>
             
             <TextInput
                 placeholder='Tên đăng nhập...'

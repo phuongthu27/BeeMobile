@@ -1,14 +1,47 @@
 import React from "react";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from '../screens/HomeScreen';
-import BudgetScreen from '../screens/BudgetScreen';
+import BudgetScreen from '../screens/BudgetSrceen/BudgetList';
+import BudgetEdit from '../screens/BudgetSrceen/BudgetEdit';
+import BudgetAdd from '../screens/BudgetSrceen/BudgetAdd';
+import BudgetDetail from '../screens/BudgetSrceen/BudgetDetail';
 import ProfileScreen from '../screens/ProfileScreen';
 import TransactionScreen from '../screens/TransactionScreen';
 import SavingGoalStackScreen from './SavingGoalStackScreen';
 
 const Tab = createBottomTabNavigator();
+
+const Stack = createStackNavigator();
+
+function BudgetStackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="BudgetList"
+        component={BudgetScreen}
+        options={{ title: 'Ngân sách' }} // Tên của trang
+      />
+      <Stack.Screen
+        name="BudgetAdd"
+        component={BudgetAdd}
+        options={{ title: 'Thêm ngân sách' }} // Tên của trang
+      />
+      <Stack.Screen
+        name="BudgetEdit"
+        component={BudgetEdit}
+        options={{ title: 'Sửa ngân sách' }} // Tên của trang
+      />
+      <Stack.Screen
+        name="BudgetDetail"
+        component={BudgetDetail}
+        options={{ title: 'Chi tiết ngân sách' }} // Tên của trang
+      />
+    </Stack.Navigator>
+  );
+}
 
 function TabNavigator() {
   return (
@@ -62,7 +95,7 @@ function TabNavigator() {
           ),
         }}
       />
-      <Tab.Screen name="Ngân sách" component={BudgetScreen} />
+      <Tab.Screen name="Ngân sách" component={BudgetStackScreen} />
       <Tab.Screen name="Tài khoản" component={ProfileScreen} />
     </Tab.Navigator>
   );
