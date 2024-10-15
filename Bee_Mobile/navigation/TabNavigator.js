@@ -5,9 +5,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from '../screens/HomeScreen';
 import BudgetScreen from '../screens/BudgetScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import TransactionScreen from '../screens/TransactionScreen';
+import TransactionStackScreen from './TransactionStack'
 import SavingGoalStackScreen from './SavingGoalStackScreen';
-
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
@@ -50,7 +49,7 @@ function TabNavigator() {
       <Tab.Screen name="Mục tiêu" component={SavingGoalStackScreen} />
       <Tab.Screen
         name="Giao dịch"
-        component={TransactionScreen}
+        component={TransactionStackScreen}
         options={{
           tabBarLabel: () => null,
           tabBarIcon: ({ focused }) => (
