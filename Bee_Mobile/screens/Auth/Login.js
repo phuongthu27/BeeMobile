@@ -35,7 +35,7 @@ function Login({ navigation }) {
             <Text style={tailwind`text-2xl font-bold text-purple-800 mb-4`}>
                 BEEMONEY
             </Text>
-            <Text style={tailwind`text-2xl font-bold text-dark-780 mb-4`}>Đăng nhập</Text>
+            <Text style={tailwind`text-2xl font-bold mb-4`}>Đăng nhập</Text>
 
             <View style={tailwind`w-80 mb-4`}>
                 <Controller
