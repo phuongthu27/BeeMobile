@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
 import tw from 'twrnc';
 import { ProgressBar } from "react-native-paper";
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Nhập icon từ thư viện vector-icons
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function SavingGoalDetail({ navigation }) {
   const [showDeposit, setShowDeposit] = useState(false);
