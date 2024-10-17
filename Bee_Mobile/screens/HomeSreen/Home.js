@@ -29,7 +29,7 @@ Card.propTypes = {
 const transactions = [
   {
     id: "1",
-    title: "Mua hàng",
+    title: "Mua hàng", 
     amount: "-50.000đ",
     description: "Mua sách",
     imageSource: require("../../assets/images/diet.png"),
