@@ -31,7 +31,6 @@ export default function AddGoal() {
     setState(numericValue);
   };
 
-  // Hàm xử lý khi nhấn vào danh mục
   const handleCategoryPress = (category) => {
     setSelectedCategory(category);
   };
@@ -120,7 +119,7 @@ export default function AddGoal() {
           {['Ăn', 'Uống', 'Mua sắm', 'Giáo dục', 'Di chuyển', 'Du lịch'].map((category, index) => (
             <TouchableOpacity
               key={index}
-              style={tw`w-1/3 p-3 border border-gray-300 rounded-lg mb-3 items-center ${selectedCategory === category ? 'bg-gray-200' : ''}`} // Thay đổi màu nền nếu được chọn
+              style={tw`w-1/3 p-3 border border-gray-300 rounded-lg mb-3 items-center ${selectedCategory === category ? 'bg-gray-200' : ''}`}
               onPress={() => handleCategoryPress(category)}
             >
               <Image
