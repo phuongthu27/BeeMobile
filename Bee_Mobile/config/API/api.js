@@ -10,7 +10,7 @@ const getToken = async () => {
     } catch (error) {
         console.error('Error getting token:', error);
         return null;
-    }
+    }  
 };
 
 const request = async ({
