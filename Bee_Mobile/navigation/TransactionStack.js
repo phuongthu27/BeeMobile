@@ -1,7 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
-
 import AddTransactionScreen from "../screens/TransactionSrceen/AddTransactionScreen";
 import TransactionList from "../screens/TransactionSrceen/TransactionListScreen";
 import ExpenseAdd from "../screens/TransactionSrceen/ExpenseSrceen/ExpenseAdd";

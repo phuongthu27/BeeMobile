@@ -1,20 +1,14 @@
 import React from "react";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import HomeScreen from '../screens/HomeScreen';
-import BudgetScreen from '../screens/BudgetScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import TransactionStackScreen from './TransactionStack'
 import SavingGoalStackScreen from './SavingGoalStackScreen';
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
-import HomeScreen from "../screens/HomeScreen";
+
 import BudgetScreen from "../screens/BudgetScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import TransactionScreen from "../screens/TransactionScreen";
-import SavingGoalStackScreen from "./SavingGoalStackScreen";
+
+
 import Home from "../screens/HomeSreen/Home";
 const Tab = createBottomTabNavigator();
 

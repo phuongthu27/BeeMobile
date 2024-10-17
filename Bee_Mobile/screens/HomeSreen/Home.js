@@ -193,6 +193,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 50,
     flex: 1,
     backgroundColor: "#f5f5f5",
   },
