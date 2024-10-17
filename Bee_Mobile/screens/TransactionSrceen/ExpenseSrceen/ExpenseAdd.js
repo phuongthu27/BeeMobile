@@ -66,11 +66,11 @@ const ExpenseAdd = () => {
         if (Array.isArray(response.data)) {
           setCategories(response.data);
         } else {
-          console.error("Categories data is not an array:", response.data);
+          console.error("Categories không phải array:", response.data);
           setCategories([]);
         }
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Lỗi fetch categories:", error);
         setCategories([]);
       } finally {
         setLoading(false);
@@ -133,11 +133,10 @@ const ExpenseAdd = () => {
     try {
       setLoading(true);
       await addTransaction(newExpense);
-      Alert.alert('Success', 'Chi tiêu đã được thêm thành công.');
+      Alert.alert('Thêm chi tiêu thành công.');
       navigation.navigate('ExpenseList');
     } catch (error) {
-      console.error('Error adding expense:', error);
-      Alert.alert('Error', error.message || 'Unable to add expense. Please try again.');
+      console.error('Lỗi thêm chi tiêu:', error);
     } finally {
       setLoading(false);
     }
@@ -151,7 +150,7 @@ const ExpenseAdd = () => {
 
       {showExpenseList && (
         <TouchableOpacity onPress={() => navigation.navigate('ExpenseList')} style={tw`bg-indigo-600 rounded-lg p-2 self-end mb-2`}>
-          <Text style={tw`text-white font-bold`}>Sổ chi tiêu</Text>
+          <Text style={tw`text-white font-bold`}>Sổ giao dịch</Text>
         </TouchableOpacity>
       )}
 
@@ -168,10 +167,10 @@ const ExpenseAdd = () => {
       </View>
 
       <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <View style={tw`flex-row items-center bg-blue-100 rounded-lg px-4 h-10 mb-4`}>
+        <View style={tw`flex-row items-center bg-indigo-50 rounded-lg px-4 h-10 mb-4`}>
           <Ionicons name="calendar" size={24} color="#D3D3D3" />
           <TextInput
-            style={tw`flex-1 text-lg ml-2`}
+            style={tw`flex-1 ml-2 `}
             value={selectedDate}
             placeholder="Chọn ngày"
             editable={false}
@@ -204,18 +203,18 @@ const ExpenseAdd = () => {
                 <Text style={tw`text-center`}>Hủy</Text>
               </TouchableOpacity>
               <TouchableOpacity style={tw`bg-indigo-600 p-2 rounded-lg flex-1 ml-2`} onPress={handleOkPress}>
-                <Text style={tw`text-white text-center`}>OK</Text>
+                <Text style={tw`text-white text-center`}>Chọn</Text>
               </TouchableOpacity>
             </View>
           </Animated.View>
         </View>
       </Modal>
 
-      <View style={tw`flex-row border border-blue-100 bg-white rounded-lg p-2 mb-4`}>
+      <View style={tw`flex-row items-center border-2 border-blue-100 bg-white rounded-lg p-2 mb-4`}>
         <Ionicons name="document-text" size={24} color="#D3D3D3" />
         <TextInput
           placeholder="Ghi chú"
-          style={tw`flex-1 text-lg ml-2`}
+          style={tw`flex-1 ml-2`}
           value={description}
           onChangeText={(text) => setDescription(text.replace(/\n{2,}/g, '\n'))}
           multiline
@@ -228,41 +227,49 @@ const ExpenseAdd = () => {
           if (index % 2 === 0) {
             rows.push(
               <View key={index} style={tw`flex-row justify-between mb-2`}>
+              <TouchableOpacity
+                key={category._id}
+                style={[
+                  tw`flex-1 items-center p-2 bg-gray-50 rounded-lg mr-2`,
+                  selectedCategory === category._id ? tw`border-2 bg-indigo-50 border-indigo-400` : ''
+                ]}
+                onPress={() => setSelectedCategory(category._id)}
+              >
+                <Image
+                  source={{ uri: category.image }}
+                  style={tw`w-10 h-10 mb-2`}
+                  resizeMode="contain"
+                />
+                <Text style={tw`text-center`}>{category.name}</Text>
+            
+                {selectedCategory === category._id && (
+                  <Ionicons name="checkmark-circle" size={24} color="#8270DB" style={tw`absolute top-0 right-0`} />
+                )}
+              </TouchableOpacity>
+            
+              {categories[index + 1] && (
                 <TouchableOpacity
-                  key={category._id}
+                  key={categories[index + 1]._id}
                   style={[
-                    tw`flex-1 items-center p-2 bg-gray-50 rounded-lg mr-2`,
-                    selectedCategory === category._id ? tw`border-2 border-indigo-600` : ''
+                    tw`flex-1 items-center p-2 bg-gray-50 rounded-lg`,
+                    selectedCategory === categories[index + 1]._id ? tw`border-2 bg-indigo-50 border-indigo-400` : ''
                   ]}
-                  onPress={() => setSelectedCategory(category._id)}
+                  onPress={() => setSelectedCategory(categories[index + 1]._id)}
                 >
                   <Image
-                    source={{ uri: category.image }}
+                    source={{ uri: categories[index + 1].image }}
                     style={tw`w-10 h-10 mb-2`}
                     resizeMode="contain"
                   />
-                  <Text style={tw`text-center`}>{category.name}</Text>
-                </TouchableOpacity>
-
+                  <Text style={tw`text-center`}>{categories[index + 1].name}</Text>
             
-                {categories[index + 1] && (
-                  <TouchableOpacity
-                    key={categories[index + 1]._id}
-                    style={[
-                      tw`flex-1 items-center p-2 bg-gray-50 rounded-lg`,
-                      selectedCategory === categories[index + 1]._id ? tw`border-1 border-indigo-500` : ''
-                    ]}
-                    onPress={() => setSelectedCategory(categories[index + 1]._id)}
-                  >
-                    <Image
-                      source={{ uri: categories[index + 1].image }}
-                      style={tw`w-10 h-10 mb-2`}
-                      resizeMode="contain"
-                    />
-                    <Text style={tw`text-center`}>{categories[index + 1].name}</Text>
-                  </TouchableOpacity>
-                )}
-              </View>
+                  {selectedCategory === categories[index + 1]._id && (
+                    <Ionicons name="checkmark-circle" size={24} color="#8270DB" style={tw`absolute top-0 right-0`} />
+                  )}
+                </TouchableOpacity>
+              )}
+            </View>
+            
             );
           }
           return rows;
