@@ -7,14 +7,14 @@ export default function CustomDeleteModal({ isVisible, onConfirm, onCancel, mess
   useEffect(() => {
     if (isVisible) {
       Animated.spring(scaleValue, {
-        toValue: 1, // Mở rộng modal
+        toValue: 1, 
         useNativeDriver: true,
         tension: 20,
         friction: 6,
       }).start();
     } else {
       Animated.timing(scaleValue, {
-        toValue: 0, // Thu nhỏ modal
+        toValue: 0,
         duration: 200,
         useNativeDriver: true,
       }).start();
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Nền mờ đằng sau
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     position: 'absolute',
     top: 0,
     bottom: 0,
